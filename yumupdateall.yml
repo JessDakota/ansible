@@ -1,5 +1,15 @@
 ---
-- name: upgrade all packages
-  yum:
-    name: '*'
-    state: latest
+- name: update lab environment using yum module
+  hosts: all
+  remote_user: jessdakota
+  become: yes
+
+  tasks:
+  - name: Update packages on all RHEL systems
+    ansible.builtin.yum
+      name: '*'
+      state: latest
+
+
+
+
