@@ -1,5 +1,5 @@
 ---
-- name: update lab environment using yum module
+- name: Update lab environment using yum module
   remote_user: jessdakota
   hosts: all
   become: true

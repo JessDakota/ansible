@@ -1,14 +1,15 @@
 ---
-- name: update lab environment using package module
+- name: Update lab environment using package module
   remote_user: jessdakota
   hosts: all
-  become: yes
+  become: true
 
   tasks:
-  - name: Update packages on all RHEL systems
-    ansible.builtin.package:
-      name: '*'
-      state: latest
+    - name: Update packages on all RHEL systems
+      ansible.builtin.package:
+        name: '*'
+        state: latest
+
   
     
 
