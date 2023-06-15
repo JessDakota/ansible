@@ -1,6 +1,7 @@
 ---
 - name: update lab environment using package module
   remote_user: jessdakota
+  hosts: all
   become: yes
 
   tasks:
