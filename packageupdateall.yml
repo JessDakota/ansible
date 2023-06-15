@@ -7,7 +7,7 @@
   - name: Update packages on all RHEL systems
     ansible.builtin.package:
       name: '*'
-   @ext:redhat.ansible   state: latest
+      state: latest
   
     
 

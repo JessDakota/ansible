@@ -1,0 +1,10 @@
+---
+- name: update lab environment using dnf module
+  remote_user: jessdakota
+  become: yes
+
+  tasks:
+  - name: Update packages on all RHEL systems using the dnf module
+    ansible.builtin.dnf:
+      name: '*'
+      state: latest

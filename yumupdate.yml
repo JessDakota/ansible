@@ -1,0 +1,10 @@
+---
+- name: update lab environment using yum module
+  remote_user: jessdakota
+  become: true
+
+  tasks:
+    - name: Update packages on all RHEL systems using the yum module
+      ansible.builtin.yum:
+        name: '*'
+        state: latest
