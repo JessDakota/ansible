@@ -9,8 +9,3 @@
       ansible.builtin.command: sudo insights-client --checkin
       when:
         - ansible_os_family == "RedHat"
-
-    
-    
-
-
