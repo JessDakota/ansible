@@ -1,0 +1,16 @@
+---
+- name: Update lab environment Insights information
+  remote_user: jessdakota
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Use the command module to do Red Hat Insights checkin
+      ansible.builtin.command: insights-client --check
+      when:
+        - ansible_os_family == "RedHat"
+
+    
+    
+
+
