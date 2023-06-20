@@ -2,7 +2,7 @@
 - name: Update lab environment using dnf module
   remote_user: jessdakota
   hosts: all
-  become: yes
+  become: true
 
   tasks:
     - name: Update packages on all RHEL systems using the dnf module
