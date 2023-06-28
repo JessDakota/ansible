@@ -17,6 +17,9 @@
         enabled: true
         state: started
 
-
-
-
+    - name: Modify snmpd.conf file replacing 'public' with 'h3Alth!x.snmpRO'
+      ansible.builtin.lineinfile:
+        path: /etc/snmp/snmpd.conf
+        regexp: public
+        line: h3Alth!x.snmpRO
+        backrefs: true
