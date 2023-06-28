@@ -1,0 +1,31 @@
+- name: configure juniper device
+  connection: local
+  gather_facts: false
+  hosts: juniper
+  user: root 
+  tasks:
+    - name: use vlans resource module
+      junipernetworks.junos.junos_vlans:
+        state: merged
+        config:
+          - name: desktops
+            vlan_id: 20
+          - name: servers
+            vlan_id: 30
+          - name: printers
+            vlan_id: 40
+          - name: DMZ
+            vlan_id: 50
+    - name: Merge vlans using on the junos platform
+      junipernetworks.junos.junos_vlans:  
+        config:
+          - name: desktops
+            vlan_id: 20
+          - name: servers
+            vlan_id: 30
+          - name: Printers
+            vlan_id: 40
+          - name: DMZ
+            vlan_id: 50
+        state: merged
+  

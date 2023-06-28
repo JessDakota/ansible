@@ -1,0 +1,22 @@
+---
+- name: Install enable and apply SNMP configuration to RHEL hosts
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install snmp packages on RHEL system
+      ansible.builtin.package:
+        name:
+          - net-snmp
+          - net-snmp-utils
+        state: latest
+
+    - name: Enable snmp service on RHEL systems
+      ansible.builtin.service:
+        name: snmpd
+        enabled: true
+        state: started
+
+
+
+
