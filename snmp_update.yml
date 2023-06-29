@@ -11,15 +11,35 @@
           - net-snmp-utils
         state: latest
 
-    - name: Enable snmp service on RHEL systems
+    - name: Start snmpd service on RHEL systems
       ansible.builtin.service:
         name: snmpd
         enabled: true
         state: started
 
-    - name: Modify snmpd.conf file replacing 'public' with 'h3Alth!x.snmpRO'
+    - name: Modify snmpd.conf file commenting the default 'public' entry 
       ansible.builtin.lineinfile:
         path: /etc/snmp/snmpd.conf
-        regexp: 'public'
-        line: 'h3Alth!x.snmpRO'
+        regexp: 'com2sec notConfigUser  default       public'
+        line: '#com2sec notConfigUser  default       public'
         backrefs: true
+
+    - name: Modify snmpd.conf file adding SNMP ro community
+      ansible.builtin.lineinfile:
+        path: /etc/snmp/snmpd.conf
+        line: 'rwcommunity h3Alth!x.snmpRO'
+        state: present
+        create: true
+    
+    - name: Modify snmpd.conf file adding SNMP rw community
+      ansible.builtin.lineinfile:
+        path: /etc/snmp/snmpd.conf
+        line: 'rwcommunity h3Alth!x.snmpRW'
+        state: present
+        create: true
+    
+    - name: Restart snmp service on RHEL systems
+      ansible.builtin.service:
+        name: snmpd
+        state: restarted
+        enabled: true
