@@ -7,9 +7,6 @@
   tasks:
     - name: Update packages on all RHEL systems using the dnf module
       when: ansible_os_family == "RedHat"
-      ansible.builtin.package:
+      ansible.builtin.dnf:
         name: '*'
         state: latest
-
-    -name: Update packages on rhel systems using the yum module
-    
