@@ -1,9 +1,11 @@
 ---
+
 - name: Create VMs
-  hosts: hypervisor
+  hosts: ender.jmacmini.lab
   vars: 
-      vm_name: testvm
+      vm_name: JDBVM
       vm_memory: 1024
+      vm_vcpus: 1
       vm_disk: 200GB
 
       
@@ -11,12 +13,12 @@
     - role: stackhpc.libvirt-vm
       libvirt_vms:
        - state: present
-          name: { vm_name }
-          memory_mb: { vm_memory }
-          vcpus: 1
-          volumes:
-            - name: 'data2'
-              device: 'disk'
-              format: 'qcow2'
-              capacity: 'vm_disk'
-              pool: 'my-pool'
+         name: '{{vm_name}}'
+         memory_mb: '{{vm_memory}}'
+         vcpus: '{{vm_vcpus}}'
+         volumes:
+           - name: 'data2'
+             device: 'disk'
+             format: 'qcow2'
+             capacity: '{{vm_disk}}'
+             pool: 'vm-images'
