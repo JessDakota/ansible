@@ -10,3 +10,9 @@
       ansible.builtin.dnf:
         name: '*'
         state: latest
+
+    - name: Update packages on RHEL systems
+      when: ansible_os_family == "RedHat"
+      ansible.builtin.package:
+        name: '*'
+        state: latest

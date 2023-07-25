@@ -6,6 +6,7 @@
 
   tasks:
     - name: Use the command module to do Red Hat Insights checkin
-      ansible.builtin.command: sudo insights-client --checkin
+      ansible.builtin.command: insights-client --check
       when:
         - ansible_os_family == "RedHat"
+        - ansible_distribution_major_version == "8"
