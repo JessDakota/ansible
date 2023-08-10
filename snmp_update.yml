@@ -27,14 +27,14 @@
     - name: Modify snmpd.conf file adding SNMP ro community
       ansible.builtin.lineinfile:
         path: /etc/snmp/snmpd.conf
-        line: 'rwcommunity h3Alth!x.snmpRO'
+        line: 'rwcommunity PASSWORD'
         state: present
         create: true
     
     - name: Modify snmpd.conf file adding SNMP rw community
       ansible.builtin.lineinfile:
         path: /etc/snmp/snmpd.conf
-        line: 'rwcommunity h3Alth!x.snmpRW'
+        line: 'rwcommunity  PASSWORD'
         state: present
         create: true
     
