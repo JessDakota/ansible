@@ -1,0 +1,8 @@
+---
+- name: Update lab environment Insights information
+  remote_user: jessdakota
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Check in with Red Hat Insights
