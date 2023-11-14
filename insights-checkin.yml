@@ -6,6 +6,6 @@
 
   tasks:
     - name: Check in with Red Hat Insights services
-      community.general.redhat_ insights:
+      community.general.redhat_insights:
         state: enabled
       register: insights
