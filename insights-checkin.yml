@@ -5,4 +5,7 @@
   become: true
 
   tasks:
-    - name: Check in with Red Hat Insights
+    - name: Check in with Red Hat Insights services
+      community.general.redhat_ insights:
+        state: enabled
+      register: insights
