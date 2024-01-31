@@ -6,6 +6,7 @@
 
   tasks:
     - name: Update packages on all RHEL systems
-      ansible.builtin.package:
-        name: '*'
-        state: latest
+    
+    
+
+    

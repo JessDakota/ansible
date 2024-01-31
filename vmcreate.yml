@@ -3,8 +3,8 @@
 - name: Create VMs
   hosts: ender.jmacmini.lab
   vars:
-      vm_name: bean
-      vm_memory: 165184
+      vm_name: demo
+      vm_memory: 4096
       vm_vcpus: 4
       vm_disk: 100GB
   roles:
