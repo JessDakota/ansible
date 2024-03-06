@@ -1,0 +1,23 @@
+---
+- name: Install Insights client, register and checkin
+  remote_user: jessdakota
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install the Red Hat Insights client
+      ansible.builtin.package:
+        name: insights-client
+        state: present
+
+    - name: Register with the Red Hat Insights service
+      ansible.builtin.command: insights-client --register
+
+    - name: Check in with Red Hat Insights service
+      ansible.builtin.command: insights-client --checkin
+    
+
+    
+
+    
+

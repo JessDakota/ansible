@@ -3,7 +3,7 @@
 - name: Create VMs
   hosts: ender.jmacmini.lab
   vars:
-      vm_name: Srini
+      vm_name: IIS
       vm_memory: 1024
       vm_vcpus: 1
       vm_disk: 200GB
