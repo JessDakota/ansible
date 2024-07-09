@@ -1,0 +1,15 @@
+---
+- name: Gather configuration information from the Palo Alto devices in my network and store them in a directory
+  hosts: panos
+  gather_facts: false
+  tasks:
+    - name: Gather configuration information from the Palo Alto devices in my network
+      register: config
+      paloaltonetworks.panos.panos_op:
+        provider: "{{ _provider_ }}"
+        cmd: show config
+        cmd_is_xml: true
+    - name: Store configuration information in a directory
+      ansible.builtin.copy:
+        content: "{{ config.stdout | to_nice_xml }}"
+        dest: "{{ inventory_hostname }}.xml"
