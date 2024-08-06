@@ -7,3 +7,8 @@
       register: reboot_required
       changed_when: reboot_required.rc == 1
       failed_when: reboot_required.rc > 1
+    - name: Print a list of systems requiring reboot
+      ansible.builtin.debug:
+        msg: '{{ ansible_hostname }} requires a reboot'
+      when: reboot_required.rc == 1
+
