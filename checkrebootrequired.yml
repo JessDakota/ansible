@@ -1,0 +1,9 @@
+---
+- name: Check if reboot is required
+  hosts: all
+  tasks:
+    - name: Check if reboot is required
+      ansible.builtin.command: needs-restarting -r
+      register: reboot_required
+      changed_when: reboot_required.rc == 1
+      failed_when: reboot_required.rc > 1
