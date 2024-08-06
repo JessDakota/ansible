@@ -1,0 +1,12 @@
+---
+- name: Check if a set of linux systems require a reboot
+  hosts: all
+  tasks:
+    - name: Check if a system requires a reboot
+      ansible.builtin.shell: needs-restarting -r
+      register: reboot_required
+      changed_when: reboot_required.rc == 1
+      failed_when: reboot_required.rc > 1
+    - name: Print a list of systems requiring a reboot
+      ansible.builtin.debug:
+        msg: "{{ ansible_play_hosts_all | map('extract', hostvars, ['reboot_required', 'stdout']) | select() | join(',') }}"
