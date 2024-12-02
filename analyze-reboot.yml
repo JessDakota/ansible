@@ -2,10 +2,18 @@
 - name: Check if reboot is required
   hosts: all
   tasks:
-    - name: Check if reboot is required
-      ansible.builtin.stat:
-        path: /var/run/reboot-required
-      register: reboot_required_file
+    - name: Check if a system requires a reboot
+      ansible.builtin.shell: needs-restarting -r
+      register: reboot_required
+      changed_when: reboot_required.rc == 1
+      failed_when: reboot_required.rc > 1
+
     - name: Reboot the system if required
       ansible.builtin.reboot:
-      when: reboot_required_file.stat.exists
+        reboot_timeout: 3600
+      when: reboot_required.rc == 1
+
+
+
+
+

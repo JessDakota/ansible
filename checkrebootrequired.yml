@@ -11,4 +11,3 @@
       ansible.builtin.debug:
         msg: '{{ ansible_hostname }} requires a reboot'
       when: reboot_required.rc == 1
-
