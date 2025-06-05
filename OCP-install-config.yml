@@ -1,0 +1,54 @@
+apiVersion: v1
+baseDomain: example.lab                     # <-- Set your base domain
+metadata:
+  name: ocplab                              # <-- Set your cluster name (e.g., ocplab)
+
+compute:
+- name: worker
+  replicas: 0                               # <-- No separate worker nodes, all nodes are converged
+
+controlPlane:
+  name: master
+  replicas: 3
+  platform:
+    baremetal:
+      rootDeviceHints:
+        deviceName: /dev/sda                # <-- Adjust based on your node’s OS disk
+
+platform:
+  baremetal:
+    apiVIP: 192.168.1.10                    # <-- API VIP (reserved IP)
+    ingressVIP: 192.168.1.11                # <-- Ingress VIP (reserved IP)
+    provisioningNetwork: "Disabled"         # <-- Assumes no separate provisioning network
+    hosts:
+    - name: ocp-node-1
+      role: master
+      bmc:
+        address: ipmi://192.168.1.101       # <-- Change to match your BMC address (or redfish://...)
+        username: admin
+        password: password
+      bootMACAddress: 52:54:00:aa:bb:01     # <-- NIC MAC address for PXE boot
+      rootDeviceHints:
+        deviceName: /dev/sda
+    - name: ocp-node-2
+      role: master
+      bmc:
+        address: ipmi://192.168.1.102
+        username: admin
+        password: password
+      bootMACAddress: 52:54:00:aa:bb:02
+      rootDeviceHints:
+        deviceName: /dev/sda
+    - name: ocp-node-3
+      role: master
+      bmc:
+        address: ipmi://192.168.1.103
+        username: admin
+        password: password
+      bootMACAddress: 52:54:00:aa:bb:03
+      rootDeviceHints:
+        deviceName: /dev/sda
+
+pullSecret: '<YOUR-REDHAT-PULL-SECRET>'     # <-- Copy from https://console.redhat.com/openshift
+sshKey: |
+  ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD...your-ssh-key-here... user@host
