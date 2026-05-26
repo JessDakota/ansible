@@ -1,19 +1,18 @@
 ---
-- name: Check if reboot is required
+- name: Reboot RHEL-family hosts that require it
   hosts: all
+  become: true
+  serial: "20%"
+  any_errors_fatal: true
   tasks:
-    - name: Check if a system requires a reboot
-      ansible.builtin.shell: needs-restarting -r
+    - name: Check if a reboot is required
+      ansible.builtin.command: needs-restarting -r
       register: reboot_required
       changed_when: reboot_required.rc == 1
       failed_when: reboot_required.rc > 1
+      when: ansible_os_family == 'RedHat'
 
     - name: Reboot the system if required
       ansible.builtin.reboot:
         reboot_timeout: 3600
-      when: reboot_required.rc == 1
-
-
-
-
-
+      when: reboot_required.rc | default(0) == 1
